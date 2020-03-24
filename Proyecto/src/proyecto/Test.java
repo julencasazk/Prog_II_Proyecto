@@ -2,6 +2,8 @@ package proyecto;
 
 import java.util.Vector;
 
+import javax.swing.JFrame;
+
 /**
  * Test
  */
@@ -21,6 +23,11 @@ public class Test {
         System.out.println("resta" + vectResta);
         System.out.println("resta"+vectResta2);
         System.out.println("Trasladado"+sumavector);
-        
+        JFrame ventana = new JFrame("Test1");
+        ventana.setDefaultCloseOperation(ventana.EXIT_ON_CLOSE);
+        ventana.setSize(800, 600);
+        ventana.setVisible(true);
+
+
     }
 }

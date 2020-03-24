@@ -3,7 +3,7 @@ package proyecto;
 /**
  * Punto
  */
-public class Punto3D {
+public class Punto3D{
 
     private double x;
     private double y;
@@ -65,7 +65,8 @@ public class Punto3D {
 
         return vResultante;
     }
-    
+
+
     /**
      * Los puntos aparecen en consola de la siguiente forma: (x,y,z)
      */
