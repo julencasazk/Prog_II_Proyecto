@@ -1,7 +1,5 @@
 package proyecto;
 
-import java.util.Vector;
-
 import javax.swing.JFrame;
 
 /**
