@@ -39,7 +39,7 @@ public class TestVentana extends JPanel{
         // Une la base con el vertice de la punta
         g.drawLine((int)piramide[0].getX(), (int)piramide[0].getY(), (int)piramide[4].getX(), (int)piramide[4].getY());
         g.drawLine((int)piramide[1].getX(), (int)piramide[1].getY(), (int)piramide[4].getX(), (int)piramide[4].getY());
-        g.drawLine((int)piramide[2].getX(), (int)piramide[3].getY(), (int)piramide[4].getX(), (int)piramide[4].getY());
+        g.drawLine((int)piramide[2].getX(), (int)piramide[2].getY(), (int)piramide[4].getX(), (int)piramide[4].getY());
         g.drawLine((int)piramide[3].getX(), (int)piramide[3].getY(), (int)piramide[4].getX(), (int)piramide[4].getY());
 
 
@@ -70,8 +70,11 @@ public class TestVentana extends JPanel{
         while (true) {
             for (int i=0; i < piramide.length; i++) {
                 Vector3D vectorTemp = piramide[i].restaPuntoAPunto(origen);
-                Vector3D vectorRotado = vectorTemp.rotarYZ(2);
+                Vector3D vectorRotado = vectorTemp.rotarXY(2);
+                // Vector3D vectorRotado2 = vectorRotado.rotarXY(2);
                 piramide[i] = origen.sumaVectorAPunto(vectorRotado);
+                Punto3D pOriginal = piramide[i];
+                
             }
 
             wait(1000/60);

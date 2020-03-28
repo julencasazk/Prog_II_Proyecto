@@ -80,7 +80,7 @@ public class Vector3D {
         double angRad = Math.toRadians(angulo);
         double nuevoX = (Math.cos(angRad) * this.x) - (Math.sin(angRad) * this.y);
         double nuevoY = (Math.sin(angRad) * this.x) + (Math.cos(angRad) * this.y);
-        Vector3D vectorRes = new Vector3D((int)nuevoX, (int)nuevoY, this.z);
+        Vector3D vectorRes = new Vector3D(nuevoX, nuevoY, this.z);
         return vectorRes;
     }
 
@@ -93,7 +93,7 @@ public class Vector3D {
         double angRad = Math.toRadians(angulo);
         double nuevoX = (Math.cos(angRad) * this.x) + (Math.sin(angRad) * this.z);
         double nuevoZ = (-1 * (Math.sin(angRad) * this.x)) + (Math.cos(angRad) * this.z);
-        Vector3D vectorRes = new Vector3D((int)nuevoX, this.y, (int)nuevoZ);
+        Vector3D vectorRes = new Vector3D(nuevoX, this.y, nuevoZ);
         return vectorRes;
     }
 
