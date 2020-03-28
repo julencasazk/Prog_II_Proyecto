@@ -68,8 +68,63 @@ public class Vector3D {
         return vResultante;
     }
 
+    // A continuación las funciones que se ocupan de rotar en los ejes XY, XZ, YZ, y la función que se encarga de escalar
+
+
     /**
-     * Calcula y devuelve el modulo del vector
+     * Rota el vector en el plano XY, o al rededor del eje Z
+     * @param angulo Angulo deseado en grados sexagesimales (º)
+     * @return Vector resultante después de la rotación
+     */
+    public Vector3D rotarXY(double angulo) {
+        double angRad = Math.toRadians(angulo);
+        double nuevoX = (Math.cos(angRad) * this.x) - (Math.sin(angRad) * this.y);
+        double nuevoY = (Math.sin(angRad) * this.x) + (Math.cos(angRad) * this.y);
+        Vector3D vectorRes = new Vector3D((int)nuevoX, (int)nuevoY, this.z);
+        return vectorRes;
+    }
+
+    /**
+     * Rota el vector en el plano XZ, o al rededor del eje Y
+     * @param angulo Angulo deseado en grados sexagesimales (º)
+     * @return Vector reusultante después de la rotación
+     */
+    public Vector3D rotarXZ(double angulo) {
+        double angRad = Math.toRadians(angulo);
+        double nuevoX = (Math.cos(angRad) * this.x) + (Math.sin(angRad) * this.z);
+        double nuevoZ = (-1 * (Math.sin(angRad) * this.x)) + (Math.cos(angRad) * this.z);
+        Vector3D vectorRes = new Vector3D((int)nuevoX, this.y, (int)nuevoZ);
+        return vectorRes;
+    }
+
+    /**
+     * Rota el vector en el plano YZ, o al rededor del eje X
+     * @param angulo Angulo deseado en grados sexagesimales (º)
+     * @return Vector reusltante después de la rotación
+     */
+    public Vector3D rotarYZ(double angulo) {
+        double angRad = Math.toRadians(angulo);
+        double nuevoY = (Math.cos(angRad) * this.y) - (Math.sin(angRad) * this.z);
+        double nuevoZ = (Math.sin(angRad) * this.y) + (Math.cos(angRad) * this.z);
+        Vector3D vectorRes = new Vector3D(this.x, nuevoY, nuevoZ);
+        return vectorRes;
+    }
+
+
+    /**
+     * Escala el vector por un factor definido en cada eje
+     * @param x Factor a escalar en el eje x
+     * @param y Factor a escalar en el eje y
+     * @param z Factor a escalar en el eje z
+     * @return Vector escalado
+     */
+    public Vector3D escalar(double x, double y, double z) {
+        Vector3D vectorRes = new Vector3D((int)(x * this.x), (int)(y * this.y), (int)(z * this.z));
+        return vectorRes;
+    }
+
+    /**
+     * Calcula y devuelve el módulo del vector
      * @return
      */
     public double getModulo() {
