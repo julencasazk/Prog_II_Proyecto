@@ -12,14 +12,27 @@ import java.awt.*;
  */
 public class TestVentana extends JPanel{
 
+    // Coordenadas centradas en la pantalla
+    // private static Punto3D origen = new Punto3D(0,0,0);
+    // private static Punto3D v1 = new Punto3D(200, 200, 0);
+    // private static Punto3D v2 = new Punto3D(400, 200, 0);
+    // private static Punto3D v3 = new Punto3D(200, 400, 0);
+    // private static Punto3D v4 = new Punto3D(400, 400, 0);
+    // private static Punto3D v5 = new Punto3D(300, 300, 100);
+    // private static Punto3D[] piramide = new Punto3D[] {v1,v2,v3,v4,v5};
+    // private static Color colorLinea = Color.WHITE;
+
+
+    // Coordenadas centradas en el origen de coordenadas(0,0,0)
     private static Punto3D origen = new Punto3D(0,0,0);
-    private static Punto3D v1 = new Punto3D(200, 200, 0);
-    private static Punto3D v2 = new Punto3D(400, 200, 0);
-    private static Punto3D v3 = new Punto3D(200, 400, 0);
-    private static Punto3D v4 = new Punto3D(400, 400, 0);
-    private static Punto3D v5 = new Punto3D(300, 300, 100);
+    private static Punto3D v1 = new Punto3D(-100, -100, 0);
+    private static Punto3D v2 = new Punto3D(100, -100, 0);
+    private static Punto3D v3 = new Punto3D(-100, 100, 0);
+    private static Punto3D v4 = new Punto3D(100, 100, 0);
+    private static Punto3D v5 = new Punto3D(0, 0, 200);
     private static Punto3D[] piramide = new Punto3D[] {v1,v2,v3,v4,v5};
     private static Color colorLinea = Color.WHITE;
+
 
 
     /**
@@ -41,8 +54,6 @@ public class TestVentana extends JPanel{
         g.drawLine((int)piramide[1].getX(), (int)piramide[1].getY(), (int)piramide[4].getX(), (int)piramide[4].getY());
         g.drawLine((int)piramide[2].getX(), (int)piramide[2].getY(), (int)piramide[4].getX(), (int)piramide[4].getY());
         g.drawLine((int)piramide[3].getX(), (int)piramide[3].getY(), (int)piramide[4].getX(), (int)piramide[4].getY());
-
-
     }
 
     /**
@@ -67,20 +78,29 @@ public class TestVentana extends JPanel{
         v.setResizable(false);
         v.setVisible(true);
 
+        // Roto todos los vertices de la piramide antes de dibujarlo
         while (true) {
             for (int i=0; i < piramide.length; i++) {
                 Vector3D vectorTemp = piramide[i].restaPuntoAPunto(origen);
-                Vector3D vectorRotado = vectorTemp.rotarXY(2);
-                // Vector3D vectorRotado2 = vectorRotado.rotarXY(2);
-                piramide[i] = origen.sumaVectorAPunto(vectorRotado);
-                Punto3D pOriginal = piramide[i];
-                
+                Vector3D vectorRotado = vectorTemp.rotarYZ(2);
+                Vector3D vectorRotado2 = vectorRotado.rotarXY(2);
+                Vector3D vectorRotado3 = vectorRotado2.rotarXZ(1.50);
+                piramide[i] = origen.sumaVectorAPunto(vectorRotado3);
             }
 
+            // Muevo la pirámide a un lugar más visible
+            Punto3D[] piramideTemp = piramide.clone();
+
+            for (int j = 0; j < piramide.length; j++){
+                piramide[j] = piramide[j].sumaVectorAPunto(new Vector3D(200,200,0));
+            }
+
+            // Espero lo sufiente y pinto 60 veces por segundo (60 FPS)
             wait(1000/60);
             v.repaint();
-            
-            
+
+            //Vuelvo a centrar la pirámide en el origen
+            piramide = piramideTemp;
 
         }
 

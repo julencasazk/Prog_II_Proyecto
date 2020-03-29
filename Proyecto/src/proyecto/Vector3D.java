@@ -119,8 +119,10 @@ public class Vector3D {
      * @return Vector escalado
      */
     public Vector3D escalar(double x, double y, double z) {
-        Vector3D vectorRes = new Vector3D((int)(x * this.x), (int)(y * this.y), (int)(z * this.z));
+
+        Vector3D vectorRes = new Vector3D((x * this.x), (y * this.y), (z * this.z));
         return vectorRes;
+
     }
 
     /**
