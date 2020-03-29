@@ -25,10 +25,10 @@ public class TestVentana extends JPanel{
 
     // Coordenadas centradas en el origen de coordenadas(0,0,0)
     private static Punto3D origen = new Punto3D(0,0,0);
-    private static Punto3D v1 = new Punto3D(-100, -100, 0);
-    private static Punto3D v2 = new Punto3D(100, -100, 0);
-    private static Punto3D v3 = new Punto3D(-100, 100, 0);
-    private static Punto3D v4 = new Punto3D(100, 100, 0);
+    private static Punto3D v1 = new Punto3D(-100, -100, -100);
+    private static Punto3D v2 = new Punto3D(100, -100, -100);
+    private static Punto3D v3 = new Punto3D(-100, 100, -100);
+    private static Punto3D v4 = new Punto3D(100, 100, -100);
     private static Punto3D v5 = new Punto3D(0, 0, 200);
     private static Punto3D[] piramide = new Punto3D[] {v1,v2,v3,v4,v5};
     private static Color colorLinea = Color.WHITE;
@@ -75,7 +75,7 @@ public class TestVentana extends JPanel{
         TestVentana comp = new TestVentana();
         v.add(comp);
         v.setSize(800, 600);
-        v.setResizable(false);
+        v.setResizable(true);
         v.setVisible(true);
 
         // Roto todos los vertices de la piramide antes de dibujarlo
@@ -92,7 +92,7 @@ public class TestVentana extends JPanel{
             Punto3D[] piramideTemp = piramide.clone();
 
             for (int j = 0; j < piramide.length; j++){
-                piramide[j] = piramide[j].sumaVectorAPunto(new Vector3D(200,200,0));
+                piramide[j] = piramide[j].sumaVectorAPunto(new Vector3D(v.getSize().getWidth()/2,v.getSize().getHeight()/2,0)); // Centro la pirámide en la pantalla independientemente de las dimensiones
             }
 
             // Espero lo sufiente y pinto 60 veces por segundo (60 FPS)
