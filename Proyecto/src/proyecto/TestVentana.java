@@ -79,7 +79,7 @@ public class TestVentana extends JPanel{
         v.setVisible(true);
 
         // Roto todos los vertices de la piramide antes de dibujarlo
-        while (true) {
+        while (true) { // Por ahora no acaba nunca
             for (int i=0; i < piramide.length; i++) {
                 Vector3D vectorTemp = piramide[i].restaPuntoAPunto(origen);
                 Vector3D vectorRotado = vectorTemp.rotarYZ(2);
