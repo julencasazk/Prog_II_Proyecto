@@ -1,18 +1,29 @@
 package juego;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class ObjetoJuego {
 
-    private int[] posicion;
-
+    private int[] posicion = new int[2];
+    private String imagenPath;
     private BufferedImage imagen;
 
+    public ObjetoJuego(int x, int y, String imagenPath) {
+        this.setPosicion(x, y);
+        this.imagenPath = imagenPath;
+        File archivoimagen = new File(imagenPath);
+       
+        try {
+            System.out.println( archivoimagen.getCanonicalPath());
+            imagen = ImageIO.read(archivoimagen);
+        } catch (IOException e) {
 
-    public ObjetoJuego(int x, int y, BufferedImage imagen) {
-        posicion[0] = x;
-        posicion[1] = y;
-        this.imagen = imagen;
+            e.printStackTrace();
+        }
     }
     
     public ObjetoJuego() {
