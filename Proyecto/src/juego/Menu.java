@@ -22,12 +22,17 @@ public class Menu {
     private static int ALTURA = 600;
     private static String[] arrayResoluciones = { "1920x1080", "1280x720", "800x600" };
 
+
+
+    //TODO Poder cerrar AMBOS menus y finalizar el programa con un solo click a la "X"
     public static void main(String[] args) {
 
         initMenuPrincipal();
         initOpciones();
 
     }
+
+
 
     /**
      * Metodo para inicializar el menu principal del juego
@@ -52,6 +57,7 @@ public class Menu {
             }
 
         });
+
         bSalir.addActionListener(new ActionListener() {
 
             @Override
@@ -61,6 +67,7 @@ public class Menu {
             }
 
         });
+
         JPanel botoneraCentral = new JPanel();
         botoneraCentral.add(bJugar);
         botoneraCentral.add(bOpciones);
@@ -84,7 +91,7 @@ public class Menu {
 
         JPanel panelResolucion =  new JPanel();
         JLabel labelResolucion = new JLabel("Resolución:");
-        JComboBox boxResolucion = new JComboBox<>(arrayResoluciones);
+        JComboBox boxResolucion = new JComboBox<>(arrayResoluciones); // Caja para elegir la resolución del juego - NO AFECTA A LOS MENÚS!!
         panelResolucion.add(labelResolucion);
         panelResolucion.add(boxResolucion);
         menuOpciones.getContentPane().add(panelResolucion);
