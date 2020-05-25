@@ -82,7 +82,7 @@ public class Menu {
 
         JPanel panelResolucion =  new JPanel();
         JLabel labelResolucion = new JLabel("Resolución:");
-        JComboBox boxResolucion = new JComboBox<>(arrayResoluciones);
+        JComboBox boxResolucion = new JComboBox<>(arrayResoluciones); // Caja para elegir la resolución del juego - NO AFECTA A LOS MENÚS!!
         panelResolucion.add(labelResolucion);
         panelResolucion.add(boxResolucion);
         menuOpciones.getContentPane().add(panelResolucion);
