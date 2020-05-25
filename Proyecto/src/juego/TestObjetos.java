@@ -13,7 +13,7 @@ public class TestObjetos extends JPanel {
     private static JFrame ventana;
     private static final int ALTURA = 600;
     private static final int ANCHURA = 800;
-    private static ObjetoJuego personaje = new ObjetoJuego(ANCHURA/2, ALTURA/2, "../Project/Prog_II_Proyecto/Proyecto/assets/player.png");
+    private static ObjetoJuego personaje = new ObjetoJuego(ANCHURA/2, ALTURA/2, "../Prog_II_Proyecto/Proyecto/assets/player.png");
     private static Graphics2D graficos;
     private KeyListener entradaTeclado;
 

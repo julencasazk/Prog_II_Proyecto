@@ -13,6 +13,6 @@ public class Entidad  extends ObjetoJuego{
         super(0,0, null);
         velocidad = 0;
     }
-
+    
 
 }
