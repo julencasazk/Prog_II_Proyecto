@@ -30,9 +30,11 @@ public class TestObjetos extends JPanel {
         ventana.setSize(ANCHURA, ALTURA);
         ventana.setBackground(Color.WHITE);
         ventana.setDefaultCloseOperation(3);
+        ventana.getContentPane().setLayout(null);
         ventana.setVisible(true);
         ventana.setResizable(false);
-        ventana.add(panel);
+
+        ventana.getContentPane().add(panel);
         ventana.repaint();
     }
 
