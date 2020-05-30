@@ -16,13 +16,26 @@ public class TestObjetos extends JPanel {
     private static JFrame ventana;
     private static final int ALTURA = 600;
     private static final int ANCHURA = 800;
-    private static ObjetoJuego personaje = new ObjetoJuego(ANCHURA/2, ALTURA/2, "player.png"); 
+    private static ObjetoJuego personaje = new ObjetoJuego(0, 0, "assets\\ship.png"); 
     private Teclado entradaTeclado;
     
     public TestObjetos(){
         this.addKeyListener(entradaTeclado);
         this.repaint();
     }
+
+    /**
+     * Un metodo para hacer una pausa entre pintados, para obtener un "framerate" constante
+     * @param ms
+     */
+    public static void wait(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
 
     public static void main(String[] args) {
 
@@ -33,10 +46,20 @@ public class TestObjetos extends JPanel {
         ventana.setSize(ANCHURA, ALTURA);
         ventana.setDefaultCloseOperation(3);
         ventana.setVisible(true);
-        ventana.setResizable(false);
+        ventana.setResizable(true);
 
         ventana.getContentPane().add(panel);
-        ventana.repaint();
+        
+
+        while (true) {
+
+            personaje.setPosicion(personaje.getPosicion()[0]+1, personaje.getPosicion()[1]+1);
+            wait(1000/60); // 1000 milisegundos por cada segundo / 60 segundos -> 60 fps
+            panel.repaint();
+
+        }
+        
+
     }
 
     /**
@@ -46,7 +69,7 @@ public class TestObjetos extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
-        g.drawImage(personaje.getImagen().getScaledInstance(100, 100, Image.SCALE_SMOOTH), 0,0, this);
+        g.drawImage(personaje.getImagen().getScaledInstance(100, 50, Image.SCALE_SMOOTH), personaje.getPosicion()[0],personaje.getPosicion()[1], this);
         g.drawLine(100 , 200, 200, 200);
         //g.drawImage(imagenPrueba, 0, 0, this);
     }
