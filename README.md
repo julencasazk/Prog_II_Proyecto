@@ -1,11 +1,14 @@
 "# Prog_II_Proyecto"
 
-La clase principal es TestVentana.
 
-Ahora mismo solo puede rotar una pirámide en los 3 ejes, además de escalarlo.
+El objetivo del proyecto ha cambiado:
 
-No hay ninguna representación de perspectiva, pero trabajaré en eso a continuación.
+El juego pretende ser un shoot em up horizontal con ambiente en el espacio, abandonando los intentos anteriores de visualizacion en 3D.
 
 //TODO
 
-Crear una clase padre de objetos tridimensionales, de la cual hereden clases de figuras geometricas, como Cubo, Pirámide... etc.
+    - Mecánicas de juego y input por teclado para mover al jugador
+    - Enemigos movibles y proyectibles ("obstáculos")
+    - Proyectiles o disparos del jugador hacia los enemigos
+    - Sistema de puntos para visualizar en la ventana de High Scores
+    - Enlazar el menu principal y sus menus hijos con la ventana principal del juego
