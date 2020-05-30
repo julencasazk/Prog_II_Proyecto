@@ -2,14 +2,11 @@ package juego;
 
 
 import java.awt.Color;
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 
 

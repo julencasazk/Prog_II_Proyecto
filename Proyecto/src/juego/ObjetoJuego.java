@@ -1,22 +1,18 @@
 package juego;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 
 public class ObjetoJuego {
 
     private int[] posicion = new int[2];
-    private String imagenPath;
     private BufferedImage imagen;
 
     public ObjetoJuego(int x, int y, String imagenPath) {
+
         this.setPosicion(x, y);
-        this.imagenPath = imagenPath;
-       
         try {
            // imagen = ImageIO.read(archivoimagen); //error
            imagen = ImageIO.read(ObjetoJuego.class.getResource(imagenPath));
