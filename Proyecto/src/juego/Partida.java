@@ -12,15 +12,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class TestObjetos extends JPanel {
+public class Partida extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private static JFrame ventana;
-    private static final int ALTURA = 1080;
-    private static final int ANCHURA = 1920;
+    public static JFrame ventana;
+    private static int ALTURA = 1080;
+    private static int ANCHURA = 1920;
     private static BufferedImage fondo;
     private static int fondoFrame = 1;
-    private static final double FACTOR_ESCALADO = (ALTURA*0.25)/504;
+    private static final double FACTOR_ESCALADO = (ALTURA * 0.25) / 504;
     private static ObjetoJuego personaje = new ObjetoJuego(0, 0, "assets\\ship.png");
     private static boolean modoDebug = true;
     private static CopyOnWriteArrayList<ObjetoJuego> proyectilesAmigo = new CopyOnWriteArrayList<ObjetoJuego>();
@@ -28,10 +28,28 @@ public class TestObjetos extends JPanel {
     private static int movimientoY = 0;
 
     /**
+     * Crea una partida desde cero con resolución x*y
+     * @param x Anchura de la resolución
+     * @param y Altura de la resolución
+     */
+    
+    public static void setResolucion(int x, int y){
+        ANCHURA = x;
+        ALTURA = y;
+    }
+
+    /**
+     * Por defecto la partida se creará con resolución FullHD (1920x1080)
+     */
+    public Partida(){
+    }
+
+    /**
      * Un metodo para hacer una pausa entre pintados, para obtener un "framerate"
      * constante
      * 
-     * @param ms Milisegundos a esperar entre pintados -> Para framerate: 1000/(framerate)
+     * @param ms Milisegundos a esperar entre pintados -> Para framerate:
+     *           1000/(framerate)
      */
     public static void wait(int ms) {
         try {
@@ -41,11 +59,59 @@ public class TestObjetos extends JPanel {
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * Originalmente el main(), ahora intento lanzarlo desde la clase Menu.java 
+     */
+    public static void iniciarPartida() {
 
-        TestObjetos panel = new TestObjetos();
+        Partida panel = new Partida();
         panel.setBackground(Color.BLACK);
         ventana = new JFrame("prueba");
+        ventana.addWindowListener(new WindowListener(){
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+                Menu.menuPrincipal.setVisible(true);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+            
+        });
 
         // Entrada de teclado para el personaje
         ventana.addKeyListener(new KeyListener() {
@@ -56,9 +122,9 @@ public class TestObjetos extends JPanel {
 
                 if (tecla == KeyEvent.VK_SPACE) {
                     // TODO disparar arma
-                    ObjetoJuego disparoAmigo = new ObjetoJuego(personaje.getPosicion()[0]+personaje.getImagen().getWidth(),
-                    personaje.getPosicion()[1]/2,
-                    "assets\\blastFriendly.png");
+                    ObjetoJuego disparoAmigo = new ObjetoJuego(
+                            personaje.getPosicion()[0] + personaje.getImagen().getWidth(),
+                            personaje.getPosicion()[1] / 2, "assets\\blastFriendly.png");
                     proyectilesAmigo.add(disparoAmigo);
                 }
 
@@ -81,10 +147,13 @@ public class TestObjetos extends JPanel {
                 if (tecla == KeyEvent.VK_S) {
                     movimientoY = 10;
                 }
-                if (tecla == KeyEvent.VK_SPACE){
-                    ObjetoJuego disparoAmigo = new ObjetoJuego((int) Math.round(personaje.getPosicion()[0]+personaje.getImagen().getWidth()*FACTOR_ESCALADO),
-                    (int) Math.round(personaje.getPosicion()[1]+(personaje.getImagen().getHeight()*FACTOR_ESCALADO/2)),
-                    "assets\\blastFriendly.png");
+                if (tecla == KeyEvent.VK_SPACE) {
+                    ObjetoJuego disparoAmigo = new ObjetoJuego(
+                            (int) Math.round(
+                                    personaje.getPosicion()[0] + personaje.getImagen().getWidth() * FACTOR_ESCALADO),
+                            (int) Math.round(personaje.getPosicion()[1]
+                                    + (personaje.getImagen().getHeight() * FACTOR_ESCALADO / 2)),
+                            "assets\\blastFriendly.png");
                     proyectilesAmigo.add(disparoAmigo);
                 }
 
@@ -112,7 +181,7 @@ public class TestObjetos extends JPanel {
 
         });
         ventana.setSize(ANCHURA, ALTURA);
-        ventana.setDefaultCloseOperation(3);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventana.setVisible(true);
         ventana.setResizable(true);
 
@@ -120,9 +189,10 @@ public class TestObjetos extends JPanel {
 
         while (true) {
 
-            //Obtencion del fondo, total de 25 fotogramas
+            // Obtencion del fondo, total de 25 fotogramas
             try {
-                fondo = ImageIO.read(TestObjetos.class.getResource("assets\\background\\fondo ("+String.valueOf(fondoFrame)+").png"));
+                fondo = ImageIO.read(Partida.class
+                        .getResource("assets\\background\\fondo (" + String.valueOf(fondoFrame) + ").png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
