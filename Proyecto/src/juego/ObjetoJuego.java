@@ -26,8 +26,7 @@ public class ObjetoJuego {
     }
     
     public ObjetoJuego() {
-        posicion[0] = 0;
-        posicion[1] = 0;
+        this.setPosicion(0, 0);
         imagen = null;
     }
 

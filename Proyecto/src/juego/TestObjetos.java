@@ -6,7 +6,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -16,33 +15,19 @@ import java.io.IOException;
 
 public class TestObjetos extends JPanel {
 
+    private static final long serialVersionUID = 1L;
     private static JFrame ventana;
     private static final int ALTURA = 600;
     private static final int ANCHURA = 800;
-    private static ObjetoJuego personaje = new ObjetoJuego(ANCHURA/2, ALTURA/2, "player.png"); // NO FUNCIONA -> Can't read input file
-    private static Graphics2D graficos;
-    private KeyListener entradaTeclado;
-    private static BufferedImage imagenPrueba;
+    private static ObjetoJuego personaje = new ObjetoJuego(ANCHURA/2, ALTURA/2, "player.png"); 
+    private Teclado entradaTeclado;
     
     public TestObjetos(){
         this.addKeyListener(entradaTeclado);
         this.repaint();
     }
 
-    // Metodo para probar a inicializar un BufferedImage desde un archivo png en la misma ruta de la clase
-    public static void cargarImagen() {
-
-        try {
-            imagenPrueba = ImageIO.read(TestObjetos.class.getResource("player.png"));
-            System.out.println(imagenPrueba);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     public static void main(String[] args) {
-        cargarImagen();
 
         TestObjetos panel = new TestObjetos();
         panel.setBackground(Color.BLACK);
@@ -57,6 +42,9 @@ public class TestObjetos extends JPanel {
         ventana.repaint();
     }
 
+    /**
+     * Superposición del metodo paintComponent de JPanel, para dibujar sobre el panel principal del juego
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -66,6 +54,9 @@ public class TestObjetos extends JPanel {
         //g.drawImage(imagenPrueba, 0, 0, this);
     }
 
+    /**
+     * Asignaciones de teclado para el movimiento y acciones del ObjetoJuego personaje
+     */
     private class Teclado implements KeyListener {
 
         @Override
