@@ -1,6 +1,6 @@
 # Proyecto de Programación II
 
-##Info
+## Info
 El objetivo del proyecto ha cambiado:
 El juego pretende ser un shoot em up horizontal con ambiente en el espacio, abandonando los intentos anteriores de visualizacion en 3D.
 
