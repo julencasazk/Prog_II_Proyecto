@@ -1,9 +1,7 @@
 package juego;
 
-// NO FUNCIONA
-import java.awt.Color;
-import java.awt.Dimension;
 
+import java.awt.Color;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,8 +10,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+
+
 
 public class TestObjetos extends JPanel {
 
@@ -30,7 +29,7 @@ public class TestObjetos extends JPanel {
         this.repaint();
     }
 
-    // Metodo para probar a inicializar un BufferedImage desde un archivo png en la misma ruta de la clase // NO FUNCIONA -> IIOException - Can't read input file
+    // Metodo para probar a inicializar un BufferedImage desde un archivo png en la misma ruta de la clase
     public static void cargarImagen() {
 
         try {
