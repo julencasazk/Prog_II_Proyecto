@@ -10,7 +10,7 @@ import java.awt.Image;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TestObjetos extends JPanel {
 
@@ -23,8 +23,7 @@ public class TestObjetos extends JPanel {
     private static final double FACTOR_ESCALADO = (ALTURA*0.25)/504;
     private static ObjetoJuego personaje = new ObjetoJuego(0, 0, "assets\\ship.png");
     private static boolean modoDebug = true;
-    private static ArrayList<ObjetoJuego> proyectilesAmigo = new ArrayList<ObjetoJuego>();
-
+    private static CopyOnWriteArrayList<ObjetoJuego> proyectilesAmigo = new CopyOnWriteArrayList<ObjetoJuego>();
     private static int movimientoX = 0;
     private static int movimientoY = 0;
 
@@ -32,7 +31,7 @@ public class TestObjetos extends JPanel {
      * Un metodo para hacer una pausa entre pintados, para obtener un "framerate"
      * constante
      * 
-     * @param ms
+     * @param ms Milisegundos a esperar entre pintados -> Para framerate: 1000/(framerate)
      */
     public static void wait(int ms) {
         try {
