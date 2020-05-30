@@ -3,6 +3,7 @@ package juego;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -15,13 +16,11 @@ public class ObjetoJuego {
     public ObjetoJuego(int x, int y, String imagenPath) {
         this.setPosicion(x, y);
         this.imagenPath = imagenPath;
-        File archivoimagen = new File(imagenPath);
        
         try {
-            System.out.println( archivoimagen.getCanonicalPath());
-            imagen = ImageIO.read(archivoimagen);
+           // imagen = ImageIO.read(archivoimagen); //error
+           imagen = ImageIO.read(ObjetoJuego.class.getResource(imagenPath));
         } catch (IOException e) {
-
             e.printStackTrace();
         }
     }
