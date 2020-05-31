@@ -27,8 +27,7 @@ public class Menu {
     private static String resolucionElegida = "1920x1080";
     private static boolean iniciar = false;
 
-    // TODO Poder cerrar AMBOS menus y finalizar el programa con un solo click a la
-    // "X"
+    // TODO Poder cerrar AMBOS menus y finalizar el programa con un solo click a la "X"
     public static void main(String[] args) {
 
         insertarResoluciones();

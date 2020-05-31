@@ -16,11 +16,11 @@ public class Partida extends JPanel {
 
     private static final long serialVersionUID = 1L;
     public static JFrame ventana;
-    private static int ALTURA = 1080;
-    private static int ANCHURA = 1920;
+    private static int ALTURA = 896;
+    private static int ANCHURA = 504;
     private static BufferedImage fondo;
     private static int fondoFrame = 1;
-    private static final double FACTOR_ESCALADO = (ALTURA * 0.25) / 504;
+    private static double FACTOR_ESCALADO = 1/2;
     private static ObjetoJuego personaje = new ObjetoJuego(0, 0, "assets\\ship.png");
     private static boolean modoDebug = true;
     private static CopyOnWriteArrayList<ObjetoJuego> proyectilesAmigo = new CopyOnWriteArrayList<ObjetoJuego>();
@@ -36,6 +36,7 @@ public class Partida extends JPanel {
     public static void setResolucion(int x, int y){
         ANCHURA = x;
         ALTURA = y;
+        FACTOR_ESCALADO = (ALTURA * 0.25) / 504;
     }
 
     /**
