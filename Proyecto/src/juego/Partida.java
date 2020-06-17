@@ -264,6 +264,7 @@ public class Partida extends JPanel {
 
                 }
                 // Termina una partida, Reinicar parámetros
+                // Carga la lista de puntuaciones desde el fichero
                 try {
                     ObjectInputStream ois = new ObjectInputStream( new FileInputStream("scores.dat"));
                     arrayPuntuaciones = (ArrayList<Puntuacion>) ois.readObject();
@@ -272,7 +273,9 @@ public class Partida extends JPanel {
                     e.printStackTrace();
                     arrayPuntuaciones =  new ArrayList<Puntuacion>();
                 }
+                // Carga a la lista la nueva puntuación
                 arrayPuntuaciones.add(new Puntuacion(score, usuario));
+                // Vuelve a escribir en el fichero con la lista actualizada
                 try {
                     ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream("scores.dat"));
                     oos.writeObject(arrayPuntuaciones);

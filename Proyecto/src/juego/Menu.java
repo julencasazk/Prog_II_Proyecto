@@ -36,7 +36,7 @@ public class Menu {
     private static String[] arrayResoluciones = { "2560x1440", "1920x1080", "1280x720", "896x504" };
     private static String resolucionElegida = "1920x1080";
 
-    // TODO Poder cerrar AMBOS menus y finalizar el programa con un solo click a la "X"
+    //TODO por ahora no puedo cerrar todas las ventanas e hilos activos pulsando el boton "X" en ninguna de ellas
     public static void main(String[] args) {
 
         insertarResoluciones();
@@ -148,7 +148,7 @@ public class Menu {
         menuOpciones.getContentPane().add(panelResolucion);
 
         JPanel panelDebug = new JPanel();
-        JCheckBox checkDebug = new JCheckBox("Modo Debug");
+        JCheckBox checkDebug = new JCheckBox("Modo Debug"); // CheckBox para activar o desactivar el modo Debug, explicado en paintComponent de Partida.java
         panelDebug.add(checkDebug);
         menuOpciones.getContentPane().add(panelDebug);
 
@@ -196,6 +196,9 @@ public class Menu {
         menuOpciones.setVisible(false); // Se hace visible desde el menu principal
     }
 
+    /**
+     * Metodo para iniciar la lista de puntuaciones, con las puntuaciones de cada partida
+     */
     public static void initPuntuaciones(){
 
         menuPuntuaciones = new JFrame("Puntuaciones");
@@ -229,7 +232,7 @@ public class Menu {
 
         menuPuntuaciones.getContentPane().add(infoPuntuaciones, BorderLayout.CENTER);
         JPanel botoneraInferior =  new JPanel();
-        JButton bVolver = new JButton("Volver");
+        JButton bVolver = new JButton("Volver"); // Del menu de puntuaciones solo se puede volver al menu principal
         bVolver.addActionListener(new ActionListener(){
 
             @Override
