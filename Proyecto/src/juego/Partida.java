@@ -9,7 +9,13 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -34,6 +40,9 @@ public class Partida extends JPanel {
     private static int movimientoX = 0;
     private static int movimientoY = 0;
     private static Boolean activo = true;
+    private static ArrayList<Puntuacion> arrayPuntuaciones;
+    private static String usuario = "AAA";
+
 
     /**
      * Crea una partida desde cero con resolución x*y
@@ -154,6 +163,7 @@ public class Partida extends JPanel {
         ventana.getContentPane().add(panel);
 
         Thread hiloJuego = new Thread() {
+            int score = 0;
             public void run() {
                 while (activo) {
 
@@ -227,9 +237,10 @@ public class Partida extends JPanel {
 
                             if ( new Rectangle(eX, eY, eAnchura, eAltura).contains(pX,pY)) {
 
-                                System.out.println("caquitas");
+                                System.out.println("Acierto!");
                                 listaEnemigos.remove(enemigo);
                                 proyectilesAmigo.remove(proyectil);
+                                score += 150;
 
                             }
 
@@ -253,7 +264,25 @@ public class Partida extends JPanel {
 
                 }
                 // Termina una partida, Reinicar parámetros
+                try {
+                    ObjectInputStream ois = new ObjectInputStream( new FileInputStream("scores.dat"));
+                    arrayPuntuaciones = (ArrayList<Puntuacion>) ois.readObject();
+                    ois.close();
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    arrayPuntuaciones =  new ArrayList<Puntuacion>();
+                }
+                arrayPuntuaciones.add(new Puntuacion(score, usuario));
+                try {
+                    ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream("scores.dat"));
+                    oos.writeObject(arrayPuntuaciones);
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Error al guardar fichero");
+                }
                 System.out.println("Partida terminada");
+                System.out.println(arrayPuntuaciones);
                 proyectilesAmigo.clear(); // Vacio los proyectiles en pantalla
                 listaEnemigos.clear(); // Vacio los enemigos en pantalla
                 personaje.setPosicion(0, 0); // El personaje vuelve a su posición inicial
@@ -389,5 +418,13 @@ public class Partida extends JPanel {
      */
     public static void setModoDebug(Boolean estado){
         modoDebug = estado;
+    }
+
+    public static String getUsuario() {
+        return usuario;
+    }
+
+    public static void setUsuario(String usuario) {
+        Partida.usuario = usuario;
     }
 }

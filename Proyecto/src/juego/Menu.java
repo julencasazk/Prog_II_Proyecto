@@ -3,6 +3,11 @@ package juego;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import javax.swing.BoxLayout;
@@ -12,18 +17,24 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyledDocument;
+
 import java.awt.Component;
 
 public class Menu {
 
     public static JFrame menuPrincipal;
     public static JFrame menuOpciones;
+    public static JFrame menuPuntuaciones;
     private static int ANCHURA = 800;
     private static int ALTURA = 600;
     private static Hashtable<String, int[]> tablaResoluciones = new Hashtable<String, int[]>();
     private static String[] arrayResoluciones = { "2560x1440", "1920x1080", "1280x720", "896x504" };
     private static String resolucionElegida = "1920x1080";
-    private static boolean iniciar = false;
 
     // TODO Poder cerrar AMBOS menus y finalizar el programa con un solo click a la "X"
     public static void main(String[] args) {
@@ -31,6 +42,7 @@ public class Menu {
         insertarResoluciones();
         initMenuPrincipal();
         initOpciones();
+        initPuntuaciones();
 
 
     }
@@ -52,6 +64,7 @@ public class Menu {
         menuPrincipal.setResizable(false);
         menuPrincipal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         JButton bJugar = new JButton("Comenzar partida");
+        JButton bPuntuaciones = new JButton("Puntuaciones");
         JButton bOpciones = new JButton("Ajutes");
         JButton bSalir = new JButton("Salir");
         bOpciones.addActionListener(new ActionListener() {
@@ -66,12 +79,24 @@ public class Menu {
 
         });
 
+        bPuntuaciones.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                menuPuntuaciones.setVisible(true);
+                menuPrincipal.setVisible(false);
+            }
+
+        });
+
         bSalir.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 menuPrincipal.dispose();
                 menuOpciones.dispose();
+                menuPuntuaciones.dispose();
             }
 
         });
@@ -85,7 +110,6 @@ public class Menu {
                     tablaResoluciones.get(resolucionElegida)[1]);
                 menuPrincipal.setVisible(false);
                 Partida.iniciarPartida();
-                iniciar = true;
                 Partida.activar();
 
             }
@@ -96,6 +120,7 @@ public class Menu {
         botoneraCentral.add(bJugar);
         botoneraCentral.add(bOpciones);
         botoneraCentral.add(bSalir);
+        botoneraCentral.add(bPuntuaciones);
 
         menuPrincipal.add(botoneraCentral, BorderLayout.CENTER);
         menuPrincipal.setVisible(true);
@@ -126,6 +151,13 @@ public class Menu {
         JCheckBox checkDebug = new JCheckBox("Modo Debug");
         panelDebug.add(checkDebug);
         menuOpciones.getContentPane().add(panelDebug);
+
+        JPanel panelUsuario = new JPanel();
+        JLabel labelUsuario = new JLabel("Nombre de Jugador:");
+        JTextField fieldUsuario = new JTextField(15);
+        panelUsuario.add(labelUsuario);
+        panelUsuario.add(fieldUsuario);
+        menuOpciones.getContentPane().add(panelUsuario);
         
 
         JButton bVolver = new JButton( "Atrás" );
@@ -153,12 +185,70 @@ public class Menu {
 
                 //Aplicar modoDebug
                 Partida.setModoDebug(checkDebug.isSelected());
+
+                //Aplicar usuario
+                Partida.setUsuario(fieldUsuario.getText());
             }
 
         });
         bAplicar.setAlignmentX(Component.CENTER_ALIGNMENT);
         menuOpciones.getContentPane().add(bAplicar);
         menuOpciones.setVisible(false); // Se hace visible desde el menu principal
+    }
+
+    public static void initPuntuaciones(){
+
+        menuPuntuaciones = new JFrame("Puntuaciones");
+        menuPuntuaciones.setSize(ANCHURA, ALTURA);
+        menuPuntuaciones.setResizable(false);
+        menuPuntuaciones.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JTextPane infoPuntuaciones =  new JTextPane();
+        StyledDocument doc = infoPuntuaciones.getStyledDocument();
+        ArrayList<Puntuacion> scores;
+        // Las puntuaciones se actualizan cuando se reinicia el programa
+        try {
+            ObjectInputStream ois = new ObjectInputStream( new FileInputStream("scores.dat"));
+            scores = (ArrayList<Puntuacion>) ois.readObject();
+            ois.close();
+
+            try {
+                for (Puntuacion p : scores){
+                    doc.insertString(doc.getLength(), p.toString() + "\n", null);
+                }
+            } catch (BadLocationException ble) {
+                System.out.println("No se pudo insertar el texto");
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("No se pudo leer el archivo!");
+        }
+
+
+
+        menuPuntuaciones.getContentPane().add(infoPuntuaciones, BorderLayout.CENTER);
+        JPanel botoneraInferior =  new JPanel();
+        JButton bVolver = new JButton("Volver");
+        bVolver.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuPrincipal.setVisible(true);
+                menuPuntuaciones.setVisible(false);
+            }
+
+        });
+        botoneraInferior.add(bVolver);
+        menuPuntuaciones.getContentPane().add(botoneraInferior, BorderLayout.SOUTH);
+
+
+
+
+
+
+
+
     }
 
 }
