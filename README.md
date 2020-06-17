@@ -6,15 +6,18 @@ El juego pretende ser un shoot em up horizontal con ambiente en el espacio, aban
 
 ## TODO
 
-    - Enemigos movibles y proyectibles ("obstáculos")
-    - Sistema de puntos para visualizar en la ventana de High Scores
+    - Proyectiles enemigos y sistema de daño
+    
+    
 
 
 ## DONE
 
     - Mecánicas de juego y input por teclado para mover al jugador
     - Proyectiles o disparos del jugador hacia los enemigos 
-    - Enlazar el menu principal y sus menus hijos con la ventana principal del juego 
+    - Enlazar el menu principal y sus menus hijos con la ventana principal del juego
+    - Enemigos movibles
+    - Sistema de puntos para visualizar en la ventana de High Scores
 
 ## Como iniciar
 La clase principal a ejecutar es Menu.java
