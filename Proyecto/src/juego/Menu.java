@@ -7,6 +7,7 @@ import java.util.Hashtable;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,14 +32,6 @@ public class Menu {
         initMenuPrincipal();
         initOpciones();
 
-        // Partida.iniciarPartida();
-        do {
-            System.out.println(iniciar);
-            if (iniciar == true) {
-                Partida.iniciarPartida();
-                iniciar = false;
-            }
-        } while (true);
 
     }
 
@@ -91,7 +84,9 @@ public class Menu {
                 Partida.setResolucion(tablaResoluciones.get(resolucionElegida)[0],
                     tablaResoluciones.get(resolucionElegida)[1]);
                 menuPrincipal.setVisible(false);
+                Partida.iniciarPartida();
                 iniciar = true;
+                Partida.activar();
 
             }
             
@@ -107,23 +102,30 @@ public class Menu {
 
     }
 
+
+    
     /**
      * Metodo para inicializae el menu de ajustes, se inicia a la vez que el menu principal, pero no es visible
      */
     public static void initOpciones() {
 
-        menuOpciones = new JFrame("Ajustes");
+        menuOpciones = new JFrame( "Ajustes" );
         menuOpciones.setSize(ANCHURA, ALTURA);
         menuOpciones.setResizable(false);
         menuOpciones.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuOpciones.getContentPane().setLayout( new BoxLayout( menuOpciones.getContentPane(), BoxLayout.Y_AXIS ) );
 
         JPanel panelResolucion =  new JPanel();
-        JLabel labelResolucion = new JLabel("Resolución:");
+        JLabel labelResolucion = new JLabel( "Resolución:" );
         JComboBox boxResolucion = new JComboBox<>(arrayResoluciones); // Caja para elegir la resolución del juego - NO AFECTA A LOS MENÚS!
         panelResolucion.add(labelResolucion);
         panelResolucion.add(boxResolucion);
         menuOpciones.getContentPane().add(panelResolucion);
+
+        JPanel panelDebug = new JPanel();
+        JCheckBox checkDebug = new JCheckBox("Modo Debug");
+        panelDebug.add(checkDebug);
+        menuOpciones.getContentPane().add(panelDebug);
         
 
         JButton bVolver = new JButton( "Atrás" );
@@ -140,14 +142,17 @@ public class Menu {
         bVolver.setAlignmentX(Component.CENTER_ALIGNMENT);
         menuOpciones.getContentPane().add(bVolver);
 
-        JButton bAplicar = new JButton( "Aplicar Resolución" );
+        JButton bAplicar = new JButton( "Aplicar Ajustes" );
         bAplicar.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Aplicar resolución
                 resolucionElegida = (String) boxResolucion.getSelectedItem();
                 System.out.println(resolucionElegida);
 
+                //Aplicar modoDebug
+                Partida.setModoDebug(checkDebug.isSelected());
             }
 
         });
