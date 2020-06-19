@@ -20,4 +20,4 @@ El juego pretende ser un shoot em up horizontal con ambiente en el espacio, aban
     - Sistema de puntos para visualizar en la ventana de High Scores
 
 ## Como iniciar
-La clase principal a ejecutar es Menu.java
+La clase principal a ejecutar es `Menu.java`

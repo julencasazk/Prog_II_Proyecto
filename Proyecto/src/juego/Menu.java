@@ -245,13 +245,6 @@ public class Menu {
         botoneraInferior.add(bVolver);
         menuPuntuaciones.getContentPane().add(botoneraInferior, BorderLayout.SOUTH);
 
-
-
-
-
-
-
-
     }
 
 }
