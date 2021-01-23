@@ -246,3 +246,4 @@ public class Menu {
     }
 
 }
+// Comment test for new VScode setup
